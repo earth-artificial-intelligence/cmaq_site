@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>  
+    </head>
+    <body>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">CMAQ AI</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Home</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div class="container">
+            <h2>CMAQ AI</h2>
+            <p>This is a simple page to visualize the CMAQ AI results and compare with corresponding CMAQ results.</p>
+
+
+            <div class="row">
+                <div class="col col-md-12">
+                    <h3>Select Date</h3> <input type="text" value="10-30-2022" id="datepicker">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col col-md-12">
+                    <h3>Comparison of CMAQ Raw Result</h3>
+                </div>
+                <div class="col col-md-6">
+                    <img id="cmaq_ai_map" src="gifs/Map_20221022.gif" alt="CMAQ AI Result" style="width:100%">
+                </div>
+                <div class="col col-md-6">
+                    <img id="cmaq_raw_map" src="gifs/Map_20221022.gif" alt="CMAQ Result" style="width:100%">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col col-md-12">
+                    <h3>Comparison of CMAQ Results with AirNow Observations</h3>
+                </div>
+                <div class="col col-md-6">
+                    <img id="cmaq_ai_airnow_map" src="gifs/Airnow_20221022.gif" alt="CMAQ AI Result" style="width:100%">
+                </div>
+                <div class="col col-md-6">
+                    <img id="cmaq_raw_airnow_map" src="gifs/Airnow_20221022.gif" alt="CMAQ Result" style="width:100%">
+                </div>
+            </div>
+        </div>
+        <script>
+            $('#datepicker').datepicker({
+                format: 'mm-dd-yyyy',
+                startDate: new Date('2022-10-17'),
+                endDate: new Date('2022-11-05'),
+                todayBtn: 'linked',
+            }).on('changeDate', function(ev){
+                console.log(ev.date)
+                const yyyy = ev.date.getFullYear();
+                let mm = ev.date.getMonth() + 1; // Months start at 0!
+                let dd = ev.date.getDate();
+
+                if (dd < 10) dd = '0' + dd;
+                if (mm < 10) mm = '0' + mm;
+
+                const formattedToday = yyyy+ mm + dd ;
+                $("#cmaq_ai_map").attr("src","gifs/Map_"+formattedToday+".gif");
+                $("#cmaq_raw_map").attr("src","gifs/Map_"+formattedToday+".gif");
+                $("#cmaq_ai_airnow_map").attr("src","gifs/Map_"+formattedToday+".gif");
+                $("#cmaq_raw_airnow_map").attr("src","gifs/Map_"+formattedToday+".gif");
+                // if (ev.date.valueOf() > endDate.valueOf()){
+                //     $('#alert').show().find('strong').text('The start date must be before the end date.');
+                // } else {
+                //     $('#alert').hide();
+                //     startDate = new Date(ev.date);
+                //     $('#date-start-display').text($('#date-start').data('date'));
+                // }
+                $('#datepicker').datepicker('hide');
+            });;
+
+        </script>
+    </body>
+</html>
+
