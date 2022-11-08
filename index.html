@@ -72,7 +72,7 @@
                 if (dd < 10) dd = '0' + dd;
                 if (mm < 10) mm = '0' + mm;
 
-                const formattedToday = str(yyyy)+ str(mm) + str(dd) ;
+                const formattedToday = yyyy.toString()+ mm.toString() + dd.toString() ;
                 console.log("formattedToday"+formattedToday)
                 $("#cmaq_ai_map").attr("src","gifs/Map_"+formattedToday+".gif");
                 $("#cmaq_raw_map").attr("src","gifs/Map_"+formattedToday+".gif");
