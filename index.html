@@ -71,11 +71,11 @@
         </div>
         <script>
             function parse_date_string(str) {
-                if(!/^(\d){8}$/.test(str)) return "invalid date";
                 var y = str.substr(0,4),
-                    m = str.substr(4,2),
+                    m = str.substr(4,2) - 1,
                     d = str.substr(6,2);
-                return new Date(y,m,d);
+                var D = new Date(y,m,d);
+                return (D.getFullYear() == y && D.getMonth() == m && D.getDate() == d) ? D : 'invalid date';
             }
 
             $.get(
@@ -117,7 +117,7 @@
                     }).on('changeDate', function(ev){
                         console.log(ev.date)
                         const yyyy = ev.date.getFullYear();
-                        let mm = ev.date.getMonth(); // Months start at 0!
+                        let mm = ev.date.getMonth()+1; // Months start at 0!
                         let dd = ev.date.getDate();
 
                         if (dd < 10) dd = '0' + dd;
