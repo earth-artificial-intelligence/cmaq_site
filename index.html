@@ -77,7 +77,14 @@
                 
                 function( data ) {
 
-                    console.log(data)
+                    // console.log(data)
+                    var lines = data.split('\n');
+                    for(var i = 0;i < lines.length;i++){
+                        if(lines[i].includes("Airnow_")){
+                            datestr = lines[i].substring("Airnow_".length);
+                            console.log(datestr)
+                        }
+                    }
 
                     $('#datepicker').datepicker({
                         format: 'mm-dd-yyyy',
