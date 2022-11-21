@@ -70,6 +70,13 @@
             </div>
         </div>
         <script>
+            function parse_date_string(str) {
+                if(!/^(\d){8}$/.test(str)) return "invalid date";
+                var y = str.substr(0,4),
+                    m = str.substr(4,2),
+                    d = str.substr(6,2);
+                return new Date(y,m,d);
+            }
 
             $.get(
                 
@@ -79,17 +86,33 @@
 
                     // console.log(data)
                     var lines = data.split('\n');
+                    var start_date = null;
+                    var end_date = null;
                     for(var i = 0;i < lines.length;i++){
                         if(lines[i].includes("Airnow_")){
                             datestr = lines[i].substring("Airnow_".length);
+                            datestr = datestr.split(".")[0]
                             console.log(datestr)
+                            current_date = parse_date_string(datestr);
+                            if(start_date == null ){
+                                start_date = current_date
+                            }
+                            if(end_date == null ){
+                                end_date = current_date
+                            }
+                            if(current_date<start_date){
+                                start_date = current_date
+                            }
+                            if(current_date>end_date){
+                                end_date = current_date
+                            }
                         }
                     }
 
                     $('#datepicker').datepicker({
                         format: 'mm-dd-yyyy',
-                        startDate: new Date('2022-10-13'),
-                        endDate: new Date('2022-11-13'),
+                        startDate: start_date,
+                        endDate: end_date,
                         todayBtn: 'linked',
                     }).on('changeDate', function(ev){
                         console.log(ev.date)
@@ -114,7 +137,9 @@
                         //     $('#date-start-display').text($('#date-start').data('date'));
                         // }
                         $('#datepicker').datepicker('hide');
-                    });;
+                    });
+
+                    $('#datepicker').datepicker('update', end_date);
 
                 }
             )
