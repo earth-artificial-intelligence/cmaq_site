@@ -149,8 +149,7 @@
                                 function( data ) {
                                     let therow = data.replace(/,/g, "</td><td>")
                                     console.log(therow)
-                                    let tablecont = ```
-                                    <table class="table">
+                                    let tablecont = `<table class="table">
                                         <thead>
                                         <tr>
                                             <th>sdate</th>
@@ -169,15 +168,12 @@
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td>
-                                                ```
+                                                <td>`
                                                 +therow+
-                                                ```
-                                                </td>
+                                                `</td>
                                             </tr>
                                         </tbody>
-                                    </table>
-                                    ```;
+                                    </table>`;
                                     console.log(tablecont)
                                     $("#ai_metrics_result").text(tablecont);
                                 }
