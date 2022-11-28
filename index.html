@@ -147,7 +147,7 @@
                             $.get(
                                 "evaluation/eval_"+formattedToday+".txt", 
                                 function( data ) {
-                                    $("#ai_metrics_result").text("sdate,dimsizes(tt),avg(oO324(tt)),avg(mO324(tt)),rmse,corr,nmb,nme,mb,me,ah,afar<br/>"+data);
+                                    $("#ai_metrics_result").text("sdate,dimsizes(tt),avg(oO324(tt)),avg(mO324(tt)),rmse,corr,nmb,nme,mb,me,ah,afar\n"+data);
                                 }
                             )
                         });
