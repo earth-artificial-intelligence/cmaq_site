@@ -147,7 +147,36 @@
                             $.get(
                                 "evaluation/eval_"+formattedToday+".txt", 
                                 function( data ) {
-                                    $("#ai_metrics_result").text("sdate,dimsizes(tt),avg(oO324(tt)),avg(mO324(tt)),rmse,corr,nmb,nme,mb,me,ah,afar\n"+data);
+
+                                    $("#ai_metrics_result").text(```
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th>sdate</th>
+                                            <th>dimsizes(tt)</th>
+                                            <th>avg(oO324(tt))</th>
+                                            <th>avg(mO324(tt))</th>
+                                            <th>rmse</th>
+                                            <th>corr</th>
+                                            <th>nmb</th>
+                                            <th>nme</th>
+                                            <th>mb</th>
+                                            <th>me</th>
+                                            <th>ah</th>
+                                            <th>afar</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                ```
+                                                +data.replace(/,/g, "</td><td>")+
+                                                ```
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    ```);
                                 }
                             )
                         });
