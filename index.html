@@ -65,10 +65,12 @@
                 <div class="col col-md-6">
                     <img id="cmaq_ai_airnow_map" src="gifs/Airnow_20221113.gif" alt="CMAQ AI Result" style="width:100%">
                     <p><button class="btn btn-primary" id="ai_eva_metrics">Evaluation Metrics</button></p>
+                    <p id="ai_metrics_result"></p>
                 </div>
                 <div class="col col-md-6">
                     <img id="cmaq_raw_airnow_map" src="gifs/OBS-FORECAST_O3_20221113.gif" alt="CMAQ Result" style="width:100%">
                     <p><button class="btn btn-primary">Evaluation Metrics Missing</button></p>
+                    <p id="cmaq_metrics_result"></p>
                 </div>
             </div>
         </div>
@@ -133,7 +135,13 @@
                         $("#cmaq_ai_airnow_map").attr("src","gifs/Airnow_"+formattedToday+".gif");
                         $("#cmaq_raw_airnow_map").attr("src","gifs/OBS-FORECAST_O3_"+formattedToday+".gif");
                         $("#ai_eva_metrics").click(function(){
-                            window.open("gifs/eval_"+formattedToday+".txt", "_blank");
+                            // window.open("evaluation/eval_"+formattedToday+".txt", "_blank");
+                            $.get(
+                                "evaluation/eval_"+formattedToday+".txt", 
+                                function( data ) {
+                                    $("#ai_metrics_result").val(data);
+                                }
+                            )
                         });
                         // if (ev.date.valueOf() > endDate.valueOf()){
                         //     $('#alert').show().find('strong').text('The start date must be before the end date.');
