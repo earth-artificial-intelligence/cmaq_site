@@ -148,6 +148,7 @@
                                 "evaluation/eval_"+formattedToday+".txt", 
                                 function( data ) {
                                     let therow = data.replace(/,/g, "</td><td>")
+                                    console.log(therow)
                                     let tablecont = ```
                                     <table class="table">
                                         <thead>
@@ -177,6 +178,7 @@
                                         </tbody>
                                     </table>
                                     ```;
+                                    console.log(tablecont)
                                     $("#ai_metrics_result").text(tablecont);
                                 }
                             )
