@@ -147,8 +147,8 @@
                             $.get(
                                 "evaluation/eval_"+formattedToday+".txt", 
                                 function( data ) {
-
-                                    $("#ai_metrics_result").text(```
+                                    let therow = data.replace(/,/g, "</td><td>")
+                                    let tablecont = ```
                                     <table class="table">
                                         <thead>
                                         <tr>
@@ -170,13 +170,14 @@
                                             <tr>
                                                 <td>
                                                 ```
-                                                +data.replace(/,/g, "</td><td>")+
+                                                +therow+
                                                 ```
                                                 </td>
                                             </tr>
                                         </tbody>
                                     </table>
-                                    ```);
+                                    ```;
+                                    $("#ai_metrics_result").text(tablecont);
                                 }
                             )
                         });
