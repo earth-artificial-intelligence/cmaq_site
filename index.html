@@ -147,7 +147,7 @@
                             $.get(
                                 "evaluation/eval_"+formattedToday+".txt", 
                                 function( data ) {
-                                    $("#ai_metrics_result").val(data);
+                                    $("#ai_metrics_result").text(data);
                                 }
                             )
                         });
