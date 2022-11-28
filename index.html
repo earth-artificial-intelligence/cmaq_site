@@ -133,8 +133,7 @@
                         $("#cmaq_ai_airnow_map").attr("src","gifs/Airnow_"+formattedToday+".gif");
                         $("#cmaq_raw_airnow_map").attr("src","gifs/OBS-FORECAST_O3_"+formattedToday+".gif");
                         $("#ai_eva_metrics").click(function(){
-                            var window = window.open("gifs/eval_"+formattedToday+".txt", "_blank");
-                            window.focus();
+                            window.open("gifs/eval_"+formattedToday+".txt", "_blank");
                         });
                         // if (ev.date.valueOf() > endDate.valueOf()){
                         //     $('#alert').show().find('strong').text('The start date must be before the end date.');
