@@ -36,10 +36,10 @@
 
             <div class="row">
                 <div class="col col-md-12">
-                    <h3>Comparison of CMAQ Raw Result</h3>
+                    <h3>Comparison of AI and CMAQ Results</h3>
                 </div>
                 <div class="col col-md-6">
-                    <h5 class="text-center">CMAQ AI Result</h5>
+                    <h5 class="text-center">AI Result</h5>
                 </div>
                 <div class="col col-md-6">
                     <h5 class="text-center">CMAQ Result</h5>
@@ -54,19 +54,21 @@
 
             <div class="row">
                 <div class="col col-md-12">
-                    <h3>Comparison of CMAQ Results with AirNow Observations</h3>
+                    <h3>Comparison of AI and CMAQ Results with AirNow Observations</h3>
                 </div>
                 <div class="col col-md-6">
-                    <h5 class="text-center">CMAQ AI Result</h5>
+                    <h5 class="text-center">AI Result</h5>
                 </div>
                 <div class="col col-md-6">
                     <h5 class="text-center">CMAQ Result</h5>
                 </div>
                 <div class="col col-md-6">
                     <img id="cmaq_ai_airnow_map" src="gifs/Airnow_20221113.gif" alt="CMAQ AI Result" style="width:100%">
+                    <p><a href="javascript:void(0)" id="ai_eva_metrics">Evaluation Metrics</a></p>
                 </div>
                 <div class="col col-md-6">
                     <img id="cmaq_raw_airnow_map" src="gifs/OBS-FORECAST_O3_20221113.gif" alt="CMAQ Result" style="width:100%">
+                    <p><a href="javascript:void(0)">Evaluation Metrics Missing</a></p>
                 </div>
             </div>
         </div>
@@ -130,6 +132,10 @@
                         $("#cmaq_raw_map").attr("src","gifs/FORECAST_O3_"+formattedToday+".gif");
                         $("#cmaq_ai_airnow_map").attr("src","gifs/Airnow_"+formattedToday+".gif");
                         $("#cmaq_raw_airnow_map").attr("src","gifs/OBS-FORECAST_O3_"+formattedToday+".gif");
+                        $("#ai_eva_metrics").click(function(){
+                            var window = window.open("gifs/eval_"+formattedToday+".txt", "_blank");
+                            window.focus();
+                        });
                         // if (ev.date.valueOf() > endDate.valueOf()){
                         //     $('#alert').show().find('strong').text('The start date must be before the end date.');
                         // } else {
