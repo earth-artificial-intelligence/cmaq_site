@@ -142,6 +142,7 @@
                         $("#cmaq_raw_map").attr("src","gifs/FORECAST_O3_"+formattedToday+".gif");
                         $("#cmaq_ai_airnow_map").attr("src","gifs/Airnow_"+formattedToday+".gif");
                         $("#cmaq_raw_airnow_map").attr("src","gifs/OBS-FORECAST_O3_"+formattedToday+".gif");
+                        $("#ai_metrics_result").html("");
                         $("#ai_eva_metrics").click(function(){
                             // window.open("evaluation/eval_"+formattedToday+".txt", "_blank");
                             $.get(
@@ -179,6 +180,7 @@
                                 }
                             )
                         });
+                        $("#cmaq_metrics_result").html("");
                         $("#cmaq_eva_metrics").click(function(){
                             $("#cmaq_metrics_result").html("missing");
                         })
