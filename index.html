@@ -175,12 +175,12 @@
                                         </tbody>
                                     </table>`;
                                     console.log(tablecont)
-                                    $("#ai_metrics_result").text(tablecont);
+                                    $("#ai_metrics_result").html(tablecont);
                                 }
                             )
                         });
                         $("#cmaq_eva_metrics").click(function(){
-                            $("#cmaq_metrics_result").text("missing");
+                            $("#cmaq_metrics_result").html("missing");
                         })
                         // if (ev.date.valueOf() > endDate.valueOf()){
                         //     $('#alert').show().find('strong').text('The start date must be before the end date.');
