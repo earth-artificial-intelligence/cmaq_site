@@ -93,7 +93,8 @@
             }
 
             function show_metrics_table(date_str){
-                $("#metric_table").html("")
+
+                $("#metric_table tr").remove()
 
                 $.get(
                     "evaluation/eval_"+date_str+".txt", 
@@ -161,10 +162,6 @@
 
                         }else{
 
-                            let found_cmaq_metrics_row = found_cmaq_metrics_rows[0]
-
-                            let therow = data.replace(/,/g, "</td><td>")
-                            
                             if($("#metrics_result").html()=== ""){
                                 // if the table is empty
                                 $("#metrics_result").append(`<table class="table" id="metric_table">
@@ -189,6 +186,8 @@
                                     </tbody>
                                 </table>`)
                             }
+
+                            let found_cmaq_metrics_row = found_cmaq_metrics_rows[0]
 
                             found_cmaq_metrics_row = found_cmaq_metrics_row.replace(/,/g, "</td><td>")
 
