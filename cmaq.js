@@ -12,7 +12,7 @@ function show_metrics_table(){
 
     console.log("adding for "+date_str)
 
-    $("#metric_table").empty();
+    $("#metrics_result").html("");
 
     $.get(
         "evaluation/eval_"+date_str+".txt", 
