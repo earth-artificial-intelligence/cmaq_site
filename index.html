@@ -93,7 +93,7 @@
             }
 
             function show_metrics_table(date_str){
-                // window.open("evaluation/eval_"+formattedToday+".txt", "_blank");
+                $("#metrics_result").html("");
                 $.get(
                     "evaluation/eval_"+date_str+".txt", 
                     function( data ) {
