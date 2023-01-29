@@ -143,7 +143,12 @@
 
                         //find the row of the day
 
-                        let found_cmaq_metrics_rows = array.filter(x => {if(x.includes(date_str)) return x;});
+                        let found_cmaq_metrics_rows = []
+                        
+                        for (let i = 0; i < array.length; i++) {
+                            if(array[i].includes(date_str))
+                                found_cmaq_metrics_rows.append(array[i]);
+                        }
 
                         console.log("found_cmaq_metrics_rows: "+found_cmaq_metrics_rows)
 
