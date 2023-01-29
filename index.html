@@ -93,10 +93,10 @@
                 return (D.getFullYear() == y && D.getMonth() == m && D.getDate() == d) ? D : 'invalid date';
             }
 
-            function show_metrics_table(data_str){
+            function show_metrics_table(date_str){
                 // window.open("evaluation/eval_"+formattedToday+".txt", "_blank");
                 $.get(
-                    "evaluation/eval_"+data_str+".txt", 
+                    "evaluation/eval_"+date_str+".txt", 
                     function( data ) {
                         let therow = data.replace(/,/g, "</td><td>")
                         console.log(therow)
@@ -144,11 +144,11 @@
 
                         //find the row of the day
 
-                        let found_cmaq_metrics_rows = array.filter(x => {x.includes(formattedToday)});
+                        let found_cmaq_metrics_rows = array.filter(x => {x.includes(date_str)});
 
                         if(len(found_cmaq_metrics_row)){
 
-                            alert("No metrics found for CMAQ of the day: "+formattedToday)
+                            alert("No metrics found for CMAQ of the day: "+date_str)
 
                         }else{
 
