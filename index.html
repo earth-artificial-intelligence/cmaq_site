@@ -147,7 +147,7 @@
                         
                         for (let i = 0; i < array.length; i++) {
                             if(array[i].includes(date_str))
-                                found_cmaq_metrics_rows.append(array[i]);
+                                found_cmaq_metrics_rows.push(array[i]);
                         }
 
                         console.log("found_cmaq_metrics_rows: "+found_cmaq_metrics_rows)
