@@ -164,7 +164,7 @@
                             let found_cmaq_metrics_row = found_cmaq_metrics_rows[0]
 
                             let therow = data.replace(/,/g, "</td><td>")
-                            console.log(therow)
+                            
                             if($("#metrics_result").html()=== ""){
                                 // if the table is empty
                                 $("#metrics_result").append(`<table class="table" id="metric_table">
@@ -215,7 +215,6 @@
                 
                 function( data ) {
 
-                    // console.log(data)
                     var lines = data.split('\n');
                     var start_date = null;
                     var end_date = null;
