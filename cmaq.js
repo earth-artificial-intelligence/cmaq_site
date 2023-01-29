@@ -8,7 +8,7 @@ function parse_date_string(str) {
 
 function show_metrics_table(date_str){
 
-    $("#metric_table tr").remove()
+    $("#metric_table").html("")
 
     $.get(
         "evaluation/eval_"+date_str+".txt", 
@@ -18,7 +18,7 @@ function show_metrics_table(date_str){
             
             if($("#metrics_result").html()=== ""){
                     // if the table is empty
-                    $("#metrics_result").append(`<table class="table" >
+                    $("#metrics_result").append(`<table class="table" id="metric_table">
                     <thead>
                     <tr>
                         <th>model</th>
@@ -36,7 +36,7 @@ function show_metrics_table(date_str){
                         <th>afar</th>
                     </tr>
                     </thead>
-                    <tbody id="metric_table">
+                    <tbody>
                     </tbody>
                     </table>`)
                 
@@ -50,7 +50,7 @@ function show_metrics_table(date_str){
 
             console.log("ai rowcont: "+ rowcont)
 
-            $("#metric_table").append(rowcont);
+            $("#metric_table tbody").append(rowcont);
         }
     )
     // $("#cmaq_metrics_result").html("missing");
@@ -116,7 +116,7 @@ function show_metrics_table(date_str){
 
                 console.log("cmaq rowcont: "+rowcont)
 
-                $("#metric_table").append(rowcont);
+                $("#metric_table tbody").append(rowcont);
 
             }
 
