@@ -8,7 +8,9 @@ function parse_date_string(str) {
 
 function show_metrics_table(date_str){
 
-    $("#metric_table").html("")
+    console.log("adding for "+date_str)
+
+    $("#metric_table").empty();
 
     $.get(
         "evaluation/eval_"+date_str+".txt", 
