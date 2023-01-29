@@ -145,6 +145,8 @@
 
                         let found_cmaq_metrics_rows = array.filter(x => {x.includes(date_str)});
 
+                        console.log(found_cmaq_metrics_rows)
+
                         if(found_cmaq_metrics_rows.length>0){
 
                             alert("No metrics found for CMAQ of the day: "+date_str)
