@@ -222,7 +222,6 @@
                         if(lines[i].includes("Airnow_")){
                             datestr = lines[i].substring("Airnow_".length);
                             datestr = datestr.split(".")[0]
-                            console.log(datestr)
                             current_date = parse_date_string(datestr);
                             if(start_date == null ){
                                 start_date = current_date
