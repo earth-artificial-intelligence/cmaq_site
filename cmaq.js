@@ -6,7 +6,9 @@ function parse_date_string(str) {
     return (D.getFullYear() == y && D.getMonth() == m && D.getDate() == d) ? D : 'invalid date';
 }
 
-function show_metrics_table(date_str){
+let date_str = null
+
+function show_metrics_table(){
 
     console.log("adding for "+date_str)
 
@@ -178,13 +180,7 @@ $.get(
             $("#cmaq_ai_airnow_map").attr("src","gifs/Airnow_"+formattedToday+".gif");
             $("#cmaq_raw_airnow_map").attr("src","gifs/OBS-FORECAST_O3_"+formattedToday+".gif");
 
-            $("#ai_eva_metrics").click(function(){
-                show_metrics_table(formattedToday);
-            });
-
-            $("#cmaq_eva_metrics").click(function(){
-                show_metrics_table(formattedToday);
-            })
+            date_str = formattedToday;
 
             $("#metrics_result").html("");
             
@@ -194,6 +190,16 @@ $.get(
         $('#datepicker').datepicker('update', end_date);
 
         $('#datepicker').datepicker('setDate', end_date);
+
+
+        $("#ai_eva_metrics").click(function(){
+            show_metrics_table();
+        });
+
+        $("#cmaq_eva_metrics").click(function(){
+            show_metrics_table();
+        })
+
 
     }
 )
