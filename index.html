@@ -65,12 +65,14 @@
                 <div class="col col-md-6">
                     <img id="cmaq_ai_airnow_map" src="gifs/Airnow_20221113.gif" alt="CMAQ AI Result" style="width:100%">
                     <p><button class="btn btn-primary" id="ai_eva_metrics">AI Metrics</button></p>
-                    <p id="ai_metrics_result" class="col col-md-12"></p>
                 </div>
                 <div class="col col-md-6">
                     <img id="cmaq_raw_airnow_map" src="gifs/OBS-FORECAST_O3_20221113.gif" alt="CMAQ Result" style="width:100%">
                     <p><button class="btn btn-danger" id="cmaq_eva_metrics">CMAQ Metrics</button></p>
-                    <p id="cmaq_metrics_result" class="col col-md-12"></p>
+                    
+                </div>
+                <div class="col col-md-12">
+                    <p id="metrics_result"></p>
                 </div>
             </div>
 
@@ -89,6 +91,112 @@
                     d = str.substr(6,2);
                 var D = new Date(y,m,d);
                 return (D.getFullYear() == y && D.getMonth() == m && D.getDate() == d) ? D : 'invalid date';
+            }
+
+            function show_metrics_table(data_str){
+                // window.open("evaluation/eval_"+formattedToday+".txt", "_blank");
+                $.get(
+                    "evaluation/eval_"+data_str+".txt", 
+                    function( data ) {
+                        let therow = data.replace(/,/g, "</td><td>")
+                        console.log(therow)
+                        if($("#metrics_result").html()){
+                                // if the table is empty
+                                $("#metrics_result").append(`<table class="table" >
+                                <thead>
+                                <tr>
+                                    <th>model</th>
+                                    <th>sdate</th>
+                                    <th>dimsizes(tt)</th>
+                                    <th>avg(oO324(tt))</th>
+                                    <th>avg(mO324(tt))</th>
+                                    <th>rmse</th>
+                                    <th>corr</th>
+                                    <th>nmb</th>
+                                    <th>nme</th>
+                                    <th>mb</th>
+                                    <th>me</th>
+                                    <th>ah</th>
+                                    <th>afar</th>
+                                </tr>
+                                </thead>
+                                <tbody id="metric_table">
+                                </tbody>
+                                </table>`)
+                        }
+                        let rowcont = `<tr>
+                                    <td>AI</td>
+                                    <td>`
+                                    +therow+
+                                    `</td>
+                                </tr>`;
+                        console.log(rowcont)
+                        $("#metric_table").append(rowcont);
+                    }
+                )
+                // $("#cmaq_metrics_result").html("missing");
+                $.get(
+                    "evaluation/alleva_12km_o3_fore.txt", 
+                    function( data ) {
+
+                        //parse csv into array
+                        let array = data.split("\\n")
+
+                        //find the row of the day
+
+                        let found_cmaq_metrics_rows = array.filter(x => {x.includes(formattedToday)});
+
+                        if(len(found_cmaq_metrics_row)){
+
+                            alert("No metrics found for CMAQ of the day: "+formattedToday)
+
+                        }else{
+
+                            let found_cmaq_metrics_row = found_cmaq_metrics_rows[0]
+
+                            let therow = data.replace(/,/g, "</td><td>")
+                            console.log(therow)
+                            if($("#metrics_result").html()){
+                                // if the table is empty
+                                $("#metrics_result").append(`<table class="table" id="metric_table">
+                                    <thead>
+                                        <tr>
+                                            <th>model</th>
+                                            <th>sdate</th>
+                                            <th>dimsizes(tt)</th>
+                                            <th>avg(oO324(tt))</th>
+                                            <th>avg(mO324(tt))</th>
+                                            <th>rmse</th>
+                                            <th>corr</th>
+                                            <th>nmb</th>
+                                            <th>nme</th>
+                                            <th>mb</th>
+                                            <th>me</th>
+                                            <th>ah</th>
+                                            <th>afar</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="metric_table">
+                                    </tbody>
+                                </table>`)
+                            }
+
+                            let rowcont = `<tr>
+                                        <td>CMAQ</td>
+                                        <td>`
+                                        +found_cmaq_metrics_row+
+                                        `</td>
+                                    </tr>`;
+                            console.log(rowcont)
+
+                            $("#metric_table").append(rowcont);
+
+                        }
+
+                        
+                    }
+                )
+
             }
 
             $.get(
@@ -142,55 +250,17 @@
                         $("#cmaq_raw_map").attr("src","gifs/FORECAST_O3_"+formattedToday+".gif");
                         $("#cmaq_ai_airnow_map").attr("src","gifs/Airnow_"+formattedToday+".gif");
                         $("#cmaq_raw_airnow_map").attr("src","gifs/OBS-FORECAST_O3_"+formattedToday+".gif");
-                        $("#ai_metrics_result").html("");
+
                         $("#ai_eva_metrics").click(function(){
-                            // window.open("evaluation/eval_"+formattedToday+".txt", "_blank");
-                            $.get(
-                                "evaluation/eval_"+formattedToday+".txt", 
-                                function( data ) {
-                                    let therow = data.replace(/,/g, "</td><td>")
-                                    console.log(therow)
-                                    let tablecont = `<table class="table">
-                                        <thead>
-                                        <tr>
-                                            <th>sdate</th>
-                                            <th>dimsizes(tt)</th>
-                                            <th>avg(oO324(tt))</th>
-                                            <th>avg(mO324(tt))</th>
-                                            <th>rmse</th>
-                                            <th>corr</th>
-                                            <th>nmb</th>
-                                            <th>nme</th>
-                                            <th>mb</th>
-                                            <th>me</th>
-                                            <th>ah</th>
-                                            <th>afar</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>`
-                                                +therow+
-                                                `</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>`;
-                                    console.log(tablecont)
-                                    $("#ai_metrics_result").html(tablecont);
-                                }
-                            )
+                            show_metrics_table(formattedToday);
                         });
-                        $("#cmaq_metrics_result").html("");
+
                         $("#cmaq_eva_metrics").click(function(){
-                            $("#cmaq_metrics_result").html("missing");
+                            show_metrics_table(formattedToday);
                         })
-                        // if (ev.date.valueOf() > endDate.valueOf()){
-                        //     $('#alert').show().find('strong').text('The start date must be before the end date.');
-                        // } else {
-                        //     $('#alert').hide();
-                        //     startDate = new Date(ev.date);
-                        //     $('#date-start-display').text($('#date-start').data('date'));
-                        // }
+
+                        $("#metrics_result").html("");
+                        
                         $('#datepicker').datepicker('hide');
                     });
 
