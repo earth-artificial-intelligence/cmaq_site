@@ -93,12 +93,15 @@
             }
 
             function show_metrics_table(date_str){
+
                 $("#metrics_result").html("");
+
                 $.get(
                     "evaluation/eval_"+date_str+".txt", 
                     function( data ) {
+                        
                         let therow = data.replace(/,/g, "</td><td>")
-                        console.log(therow)
+                        
                         if($("#metrics_result").html()=== ""){
                                 // if the table is empty
                                 $("#metrics_result").append(`<table class="table" >
@@ -122,6 +125,7 @@
                                 <tbody id="metric_table">
                                 </tbody>
                                 </table>`)
+                            
                         }
                         let rowcont = `<tr>
                                     <td>AI</td>
@@ -129,7 +133,7 @@
                                     +therow+
                                     `</td>
                                 </tr>`;
-                        console.log(rowcont)
+
                         $("#metric_table").append(rowcont);
                     }
                 )
@@ -151,8 +155,6 @@
                             }
                                 
                         }
-
-                        console.log("found_cmaq_metrics_rows: "+found_cmaq_metrics_rows)
 
                         if(found_cmaq_metrics_rows.length==0){
 
@@ -197,7 +199,6 @@
                                         +found_cmaq_metrics_row+
                                         `</td>
                                     </tr>`;
-                            console.log(rowcont)
 
                             $("#metric_table").append(rowcont);
 
