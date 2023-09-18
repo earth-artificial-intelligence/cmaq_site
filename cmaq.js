@@ -140,7 +140,7 @@ function append_all_metrics_plot_pngs(){
     ];
 
     const metric_var_explains = [
-        'Average Observation', 'Average Modification', 'Root Mean Square Error',
+        'Average of oO324(tt)', 'Average of mO324(tt)', 'Root Mean Square Error',
         'Correlation', 'Normalized Mean Bias', 'Normalized Mean Error',
         'Mean Bias', 'Mean Error', 'area Hit Rate', 'area False-Alarm Ratio'
     ]
