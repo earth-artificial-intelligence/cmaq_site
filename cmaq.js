@@ -130,6 +130,32 @@ function show_metrics_table(){
 
 }
 
+function append_all_metrics_plot_pngs(){
+
+    // Sample image URLs (replace with actual image URLs)
+    const metric_vars = [
+        'AVG_OBS', 'AVG_MOD', 'RMSE', 
+        'CORR', 'NMB', 'NME', 'MB', 'ME', 'AH', 'AFAR',
+    // 'DATE', 'NSITES', 
+    ];
+
+    // Get the <div> element by its ID
+    const imageDiv = document.getElementById('metrics_figures');
+
+    // Loop through the image URLs and create <img> elements
+    metric_vars.forEach((metric_var, index) => {
+        const img = document.createElement('img');
+        img.src = "evaluation/"+metric_var+"_plot.png";
+        img.alt = metric_var;
+        // Set any additional attributes or styles for the <img> element
+        // img.setAttribute('attributeName', 'attributeValue');
+        // img.style.propertyName = 'propertyValue';
+
+        // Append the <img> element to the <div>
+        imageDiv.appendChild(img);
+    });
+}
+
 $.get(
     
     "gifs/filelist.txt", 
@@ -200,6 +226,7 @@ $.get(
             show_metrics_table();
         })
 
+        append_all_metrics_plot_pngs()
 
     }
 )
