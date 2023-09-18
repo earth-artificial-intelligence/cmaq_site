@@ -139,11 +139,22 @@ function append_all_metrics_plot_pngs(){
     // 'DATE', 'NSITES', 
     ];
 
+    const metric_var_explains = [
+        'Average Observation', 'Average Modification', 'Root Mean Square Error',
+        'Correlation', 'Normalized Mean Bias', 'Normalized Mean Error',
+        'Mean Bias', 'Mean Error', 'area Hit Rate', 'area False-Alarm Ratio'
+    ]
+
     // Get the <div> element by its ID
     const imageDiv = document.getElementById('metrics_figures');
 
     // Loop through the image URLs and create <img> elements
     metric_vars.forEach((metric_var, index) => {
+
+        const title = document.createElement('h5');
+        title.textContent = metric_var + " : " + metric_var_explains[index];
+        imageDiv.appendChild(title);
+
         const img = document.createElement('img');
         img.src = "evaluation/"+metric_var+"_plot.png";
         img.alt = metric_var;
